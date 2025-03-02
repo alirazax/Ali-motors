@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car showroom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://kit.fontawesome.com/fa5135595c.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="flex items-center py-8 justify-between px-5 ">
+          <!-- Logo and Toggle Button -->
+          <div class="flex items-center gap-4">
+            <div class="sm:hidden">
+              <i
+                id="menu-toggle"
+                class="fa-solid fa-bars text-2xl cursor-pointer"
+              ></i>
+            </div>
+            <div class="text-3xl font-bold">
+              Ali <span class="text-blue-500">Autos</span>
+            </div>
+          </div>
+
+          <!-- Navigation Menu (Hidden on Mobile) -->
+          <div id="nav-menu" class="hidden sm:flex gap-4 text-[16px]">
+            <a class="hover:text-blue-500" href="#">Buy a car</a>
+            <a class="hover:text-blue-500" href="#">Sell a car</a>
+            <a class="hover:text-blue-500" href="#">About us</a>
+            <a class="hover:text-blue-500" href="#">Contact</a>
+          </div>
+
+          <!-- Sign In / Log In -->
+          <div class="flex items-center gap-4">
+            <div class="">
+              <div class="border-2 sm:hidden inline rounded-full p-2 px-3">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <a href="">
+                <button
+                  class="hidden sm:inline-flex border-2 px-4 py-2 rounded-full items-center justify-center gap-2"
+                >
+                  <i class="fa-solid fa-phone mt-[2px]"></i> +923039390346
+                </button>
+              </a>
+            </div>
+            <!-- Mobile User Icon -->
+            <i
+              id="user-toggle"
+              class="fa-solid fa-circle-user text-4xl sm:hidden cursor-pointer"
+            ></i>
+            <div class="hidden sm:flex gap-4">
+              <a href="#"
+                ><button class="px-4 py-2 border-2 rounded-full">
+                  Sign up
+                </button></a
+              >
+              <a href="#"
+                ><button
+                  class="bg-blue-500 text-white rounded-full px-4 py-2 flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-user"></i> Log in
+                </button></a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Dropdown (Initially Hidden) -->
+        <div
+          id="mobile-menu"
+          class="hidden flex-col gap-4 px-10 py-4 mt-2 bg-gray-100"
+        >
+          <a class="hover:text-blue-500" href="#">Buy a car</a>
+          <a class="hover:text-blue-500" href="#">Sell a car</a>
+          <a class="hover:text-blue-500" href="#">About us</a>
+          <a class="hover:text-blue-500" href="#">Contact</a>
+          <hr />
+          <a href="#">
+            <button class="px-4 py-2 border-2 rounded-full w-full">
+              Sign up or log in
+            </button>
+          </a>
+        </div>
+
+        <div
+          id="mobile-auth"
+          class="hidden flex-col gap-4 px-10 py-4 mt-2 bg-gray-100"
+        >
+          <a href="#">
+            <button class="px-4 py-2 w-full border-2 rounded-full">
+              Sign up
+            </button>
+          </a>
+          <a href="#">
+            <button
+              class="bg-blue-500 w-full text-white rounded-full px-4 py-2 flex items-center justify-center gap-2"
+            >
+              <i class="fa-solid fa-user"></i> Log in
+            </button>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <script>
+      document
+        .getElementById("menu-toggle")
+        .addEventListener("click", function () {
+          let menu = document.getElementById("mobile-menu");
+          let auth = document.getElementById("mobile-auth");
+
+          // Hide auth when showing the menu
+          auth.classList.add("hidden");
+          auth.classList.remove("flex");
+
+          // Toggle menu
+          menu.classList.toggle("hidden");
+          menu.classList.toggle("flex");
+        });
+
+      document
+        .getElementById("user-toggle") // Fix the typo if needed
+        .addEventListener("click", function () {
+          let menu = document.getElementById("mobile-menu");
+          let auth = document.getElementById("mobile-auth");
+
+          // Hide menu when showing auth
+          menu.classList.add("hidden");
+          menu.classList.remove("flex");
+
+          // Toggle auth
+          auth.classList.toggle("hidden");
+          auth.classList.toggle("flex");
+        });
+    </script>
+
+    <section
+      class="relative h-[50vh] bg-cover bg-center bg-[url(/hero.webp)] px-10  sm:px-[100px] py-8"
+    >
+      <!-- Text Box -->
+      <div
+        class="sm:bg-black/60 bg-white s p-6 py-12 rounded-xl shadow-lg border shadoww-white/10 border-white/20 left-8 sm:left-30 md:left-40          right-8  max-w-xl  absolute top-[70%] sm:absolute sm:top-1/2      sm:-translate-y-1/2 sm:text-white"
+      >
+        <h1 class="text-2xl md:text-4xl sm:text-3xl font-bold pb-4">
+          Wholesale deals on quality cars from Ali Autos
+        </h1>
+        <p class="sm:text-gray-300 text-gray-400 pb-4">
+          Buy fully inspected used cars with clear history. For an unbeatable
+          price.
+        </p>
+        <div class="text-blue-500 sm:text-white">
+          <p class="flex items-center gap-6 pb-4">
+            <span
+              class="size-8 flex justify-center items-center bg-blue-500 sm:bg-white rounded-full"
+              ><i class="fa-solid sm:text-blue-500 text-white fa-check"></i>
+            </span>
+            More than 12 000 well-maintained cars
+          </p>
+          <p class="flex items-center gap-6 pb-4">
+            <span
+              class="size-8 flex justify-center items-center bg-blue-500 sm:bg-white rounded-full"
+              ><i class="fa-solid text-white sm:text-blue-500 fa-check"></i>
+            </span>
+            VIP partner prices on all vehicles
+          </p>
+          <p class="flex items-center gap-6 pb-10">
+            <span
+              class="size-8 flex justify-center items-center bg-blue-500 sm:bg-white rounded-full"
+              ><i class="fa-solid sm:text-blue-500 text-white fa-check"></i>
+            </span>
+            Special discounts on hitlist cars every day
+          </p>
+        </div>
+
+        <button
+          class="bg-blue-500/80 rounded-xl px-4 py-4 font-extrabold text-white w-full sm:w-auto capitalize transition shadow-lg hover:bg-blue-400/90"
+        >
+          become a partner
+        </button>
+      </div>
+    </section>
+  </body>
+</html>
