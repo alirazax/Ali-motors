@@ -9,6 +9,8 @@
       src="https://kit.fontawesome.com/fa5135595c.js"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <style>
       /* Hide scrollbar for Chrome, Safari, and Edge */
       #scrollContainer::-webkit-scrollbar,
@@ -339,6 +341,30 @@
                   for our partners.
                 </p>
               </div>
+              <div
+                class="flex-none w-80 bg-white py-10 px-6 text-center rounded-xl shadow-md snap-center"
+              >
+                <h2 class="text-4xl font-bold text-blue-600">720</h2>
+                <p class="text-sm font-semibold text-blue-500 uppercase">
+                  Makes and Models
+                </p>
+                <p class="text-gray-600 mt-2">
+                  SUVs, sportscars, MPVs. Anything with 4 wheels and a steering
+                  wheel.
+                </p>
+              </div>
+              <div
+                class="flex-none w-80 bg-white py-10 px-6 text-center rounded-xl shadow-md snap-center"
+              >
+                <h2 class="text-4xl font-bold text-blue-600">720</h2>
+                <p class="text-sm font-semibold text-blue-500 uppercase">
+                  Makes and Models
+                </p>
+                <p class="text-gray-600 mt-2">
+                  SUVs, sportscars, MPVs. Anything with 4 wheels and a steering
+                  wheel.
+                </p>
+              </div>
             </div>
 
             <!-- Progress Indicator -->
@@ -373,84 +399,80 @@
               </button>
             </div>
           </div>
-
           <script>
-            const scrollContainer = document.getElementById("scrollContainer");
-            const progressBar = document.getElementById("progressBar");
-            const progressText = document.getElementById("progressText");
-            const prevBtn = document.getElementById("prevBtn");
-            const nextBtn = document.getElementById("nextBtn");
+            document.addEventListener("DOMContentLoaded", function () {
+              const scrollContainer =
+                document.getElementById("scrollContainer");
+              const progressBar = document.getElementById("progressBar");
+              const progressText = document.getElementById("progressText");
+              const totalSteps = document.getElementById("totalSteps"); // Reference totalSteps
+              const prevBtn = document.getElementById("prevBtn");
+              const nextBtn = document.getElementById("nextBtn");
 
-            let currentIndex = 0;
-            const cards = [...scrollContainer.children];
-            const totalCards = cards.length;
+              let currentIndex = 0;
+              const cards = Array.from(scrollContainer.children);
+              const totalCards = cards.length;
 
-            // Update UI function
-            function updateUI() {
-              progressText.innerText = String(currentIndex + 1).padStart(
-                2,
-                "0"
-              );
-              progressBar.style.width = `${
-                ((currentIndex + 1) / totalCards) * 100
-              }%`;
+              // ✅ Set total steps dynamically based on the number of cards
+              totalSteps.innerText = String(totalCards).padStart(2, "0");
 
-              // Enable/Disable Buttons
-              prevBtn.disabled = currentIndex === 0;
-              nextBtn.disabled = currentIndex === totalCards - 1;
+              function updateUI() {
+                progressText.innerText = String(currentIndex + 1).padStart(
+                  2,
+                  "0"
+                );
+                progressBar.style.width = `${
+                  ((currentIndex + 1) / totalCards) * 100
+                }%`;
 
-              // Adjust opacity for disabled state
-              prevBtn.classList.toggle("opacity-50", currentIndex === 0);
-              nextBtn.classList.toggle(
-                "opacity-50",
-                currentIndex === totalCards - 1
-              );
-            }
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex === totalCards - 1;
 
-            // Scroll to the next card
-            function scrollRight() {
-              if (currentIndex < totalCards - 1) {
-                currentIndex++;
-                cards[currentIndex].scrollIntoView({
-                  behavior: "smooth",
-                  block: "nearest",
-                  inline: "center",
-                });
+                prevBtn.classList.toggle("opacity-50", currentIndex === 0);
+                nextBtn.classList.toggle(
+                  "opacity-50",
+                  currentIndex === totalCards - 1
+                );
               }
-            }
 
-            // Scroll to the previous card
-            function scrollLeft() {
-              if (currentIndex > 0) {
-                currentIndex--;
-                cards[currentIndex].scrollIntoView({
-                  behavior: "smooth",
-                  block: "nearest",
-                  inline: "center",
-                });
+              function scrollToCard(index) {
+                if (index >= 0 && index < totalCards) {
+                  currentIndex = index;
+                  cards[currentIndex].scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "center",
+                  });
+                }
               }
-            }
 
-            // Observe which card is in view
-            const observer = new IntersectionObserver(
-              (entries) => {
-                entries.forEach((entry) => {
-                  if (entry.isIntersecting) {
-                    currentIndex = cards.indexOf(entry.target);
-                    updateUI();
-                  }
-                });
-              },
-              { threshold: 0.6 }
-            );
+              function scrollRight() {
+                scrollToCard(currentIndex + 1);
+              }
 
-            cards.forEach((card) => observer.observe(card));
+              function scrollLeft() {
+                scrollToCard(currentIndex - 1);
+              }
 
-            // Attach event listeners
-            nextBtn.addEventListener("click", scrollRight);
-            prevBtn.addEventListener("click", scrollLeft);
+              const observer = new IntersectionObserver(
+                (entries) => {
+                  entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                      currentIndex = cards.indexOf(entry.target);
+                      updateUI();
+                    }
+                  });
+                },
+                { threshold: 0.6 }
+              );
 
-            updateUI();
+              cards.forEach((card) => observer.observe(card));
+
+              prevBtn.addEventListener("click", scrollLeft);
+              nextBtn.addEventListener("click", scrollRight);
+
+              updateUI();
+            });
           </script>
         </div>
 
@@ -688,6 +710,102 @@
                   </div>
                 </div>
               </div>
+              <!--fivth car-->
+              <div
+                class="flex-none w-80 rounded-lg snap-center shadow-lg bg-white flex-shrink-0"
+              >
+                <div class="relative overflow-hidden h-48">
+                  <img
+                    src="/mg-zs-11.jpg"
+                    alt="MG ZS 11"
+                    class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div
+                    class="absolute top-3 left-3 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-md"
+                  >
+                    AVAILABLE IN 26 DAYS
+                  </div>
+                </div>
+                <div class="p-6">
+                  <h1 class="text-lg font-semibold">MG ZS II</h1>
+                  <p class="text-sm text-gray-500">2024 • 12,975 km</p>
+                  <div class="flex space-x-2 mt-3">
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Petrol
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      1.0 Turbo, 82 kW
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Automat
+                    </button>
+                  </div>
+                  <div class="pt-6 border-t mt-4">
+                    <div class="flex justify-between">
+                      <p class="text-gray-500">Price excl. VAT:</p>
+                      <p class="text-blue-600 font-semibold">€16,299</p>
+                    </div>
+                    <div class="flex justify-between">
+                      <p class="text-gray-400">Price incl. VAT:</p>
+                      <p class="text-gray-500">€20,047</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--6th car-->
+              <div
+                class="flex-none w-80 rounded-lg snap-center shadow-lg bg-white flex-shrink-0"
+              >
+                <div class="relative overflow-hidden h-48">
+                  <img
+                    src="/mg-zs-11.jpg"
+                    alt="MG ZS 11"
+                    class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div
+                    class="absolute top-3 left-3 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-md"
+                  >
+                    AVAILABLE IN 26 DAYS
+                  </div>
+                </div>
+                <div class="p-6">
+                  <h1 class="text-lg font-semibold">MG ZS II</h1>
+                  <p class="text-sm text-gray-500">2024 • 12,975 km</p>
+                  <div class="flex space-x-2 mt-3">
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Petrol
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      1.0 Turbo, 82 kW
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Automat
+                    </button>
+                  </div>
+                  <div class="pt-6 border-t mt-4">
+                    <div class="flex justify-between">
+                      <p class="text-gray-500">Price excl. VAT:</p>
+                      <p class="text-blue-600 font-semibold">€16,299</p>
+                    </div>
+                    <div class="flex justify-between">
+                      <p class="text-gray-400">Price incl. VAT:</p>
+                      <p class="text-gray-500">€20,047</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <!-- Progress Indicator -->
@@ -735,6 +853,10 @@
             const cards2 = [...scrollContainer2.children];
             const totalCards2 = cards2.length;
 
+            // 🔹 Added total steps dynamically
+            const totalSteps2 = document.getElementById("totalSteps2"); // 🔹 Added line
+            totalSteps2.innerText = String(totalCards2).padStart(2, "0"); // 🔹 Added line
+
             // Update UI function
             function updateUI() {
               progressText2.innerText = String(currentIndex2 + 1).padStart(
@@ -758,7 +880,8 @@
             }
 
             // Scroll to the next card
-            function scrollRigh2() {
+            function scrollRight2() {
+              // 🔹 Fixed function name
               if (currentIndex2 < totalCards2 - 1) {
                 currentIndex2++;
                 cards2[currentIndex2].scrollIntoView({
@@ -797,7 +920,7 @@
             cards2.forEach((card2) => observer2.observe(card2));
 
             // Attach event listeners
-            nextBtn2.addEventListener("click", scrollRigh2);
+            nextBtn2.addEventListener("click", scrollRight2); // 🔹 Fixed function name
             prevBtn2.addEventListener("click", scrollLeft2);
 
             updateUI();
@@ -813,5 +936,130 @@
         </div>
       </div>
     </section>
+    <!--map session -->
+    <div
+      class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-6"
+    >
+      <h1 class="text-3xl font-bold text-blue-600 mb-6">
+        Car Sourcing Locations
+      </h1>
+
+      <!-- Map Container -->
+      <div class="relative w-full max-w-5xl">
+        <div
+          id="map"
+          class=" h-[300px]  sm:h-[600px] w-full rounded-lg shadow-lg border border-gray-300"
+        ></div>
+
+        <!-- Tooltip for enabling zoom -->
+        <div
+          id="mapTooltip"
+          class="absolute top-2 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 text-sm rounded-md opacity-0 transition-opacity duration-300 pointer-events-none"
+          style="display: none; z-index: 1000"
+        >
+          Tap to enable zooming
+        </div>
+      </div>
+
+      <script>
+        // Initialize the map centered on Pakistan
+        var map = L.map("map").setView([30.3753, 69.3451], 6);
+
+        // Add High-Quality Tiles (Carto Positron)
+        L.tileLayer(
+          "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+          {
+            attribution: '© <a href="https://carto.com/">CARTO</a>',
+            subdomains: "abcd",
+            maxZoom: 20,
+          }
+        ).addTo(map);
+
+        // Define car sourcing locations with descriptions
+        var locations = [
+          { lat: 31.5497, lng: 74.3436, label: "Lahore - Car Sourcing Hub" },
+          {
+            lat: 24.8607,
+            lng: 67.0011,
+            label: "Karachi - Major Import Location",
+          },
+          {
+            lat: 33.6844,
+            lng: 73.0479,
+            label: "Islamabad - Premium Car Dealers",
+          },
+          { lat: 30.1575, lng: 71.5249, label: "Multan - Used Car Market" },
+          { lat: 32.1617, lng: 74.1883, label: "Gujranwala - Car Auctions" },
+        ];
+
+        // Add markers for each location
+        locations.forEach((location) => {
+          L.marker([location.lat, location.lng])
+            .addTo(map)
+            .bindPopup(`<b>${location.label}</b>`);
+        });
+
+        // Disable scroll zoom initially
+        map.scrollWheelZoom.disable();
+
+        // Tooltip for enabling scroll zoom
+        var mapTooltip = document.getElementById("mapTooltip");
+        var mapContainer = document.getElementById("map");
+
+        // Show tooltip when user taps or clicks on the map
+        function showTooltip() {
+          if (!map.scrollWheelZoom.enabled()) {
+            mapTooltip.style.display = "block"; // Ensure it is visible
+            setTimeout(() => (mapTooltip.style.opacity = "1"), 10); // Smooth fade-in
+          }
+        }
+
+        // Hide tooltip
+        function hideTooltip() {
+          mapTooltip.style.opacity = "0";
+          setTimeout(() => (mapTooltip.style.display = "none"), 300); // Hide after fade-out
+        }
+
+        // Detect if the user is on a mobile device
+        function isMobileDevice() {
+          return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        }
+
+        // Mobile: Show tooltip when entering the map (scrolling into view)
+        if (isMobileDevice()) {
+          let observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  showTooltip();
+                } else {
+                  hideTooltip();
+                }
+              });
+            },
+            { threshold: 0.3 }
+          );
+
+          observer.observe(mapContainer);
+        } else {
+          // Desktop: Show tooltip when mouse enters
+          mapContainer.addEventListener("mouseenter", showTooltip);
+          mapContainer.addEventListener("mouseleave", hideTooltip);
+        }
+
+        // Enable zoom when clicking or tapping on the map
+        map.on("click", function () {
+          map.scrollWheelZoom.enable();
+          hideTooltip();
+        });
+
+        // Disable zoom when clicking outside the map
+        document.addEventListener("click", function (event) {
+          if (!mapContainer.contains(event.target)) {
+            map.scrollWheelZoom.disable();
+          }
+        });
+      </script>
+    </div>
   </body>
 </html>
