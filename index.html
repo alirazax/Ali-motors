@@ -9,6 +9,26 @@
       src="https://kit.fontawesome.com/fa5135595c.js"
       crossorigin="anonymous"
     ></script>
+    <style>
+      /* Hide scrollbar for Chrome, Safari, and Edge */
+      #scrollContainer::-webkit-scrollbar,
+      #scrollContainer2::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Hide scrollbar for Firefox */
+      #scrollContainer,
+      #scrollContainer2 {
+        scrollbar-width: none;
+      }
+
+      /* Hide scrollbar for IE and Edge */
+      #scrollContainer,
+      #scrollContainer2 {
+        -ms-overflow-style: none;
+        overflow-x: auto; /* Ensure scrolling still works */
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -211,11 +231,14 @@
 
           <!-- Advanced Search Section -->
           <div
-            class="flex items-center space-x-2 text-blue-600 hover:text-blue-800 cursor-pointer"
+            class="flex items-center space-x-2 text-blue-600 group hover:text-blue-800 cursor-pointer"
           >
-            <span class="font-medium">Advanced search</span>
+            <span
+              class="font-medium group-hover:translate-x-2 transition-transform duration-200"
+              >Advanced search</span
+            >
             <i
-              class="fa-solid fa-arrow-right transition-transform duration-200 hover:translate-x-1"
+              class="fa-solid fa-arrow-right transition-transform duration-200 group-hover:translate-x-2"
             ></i>
           </div>
         </div>
@@ -256,16 +279,14 @@
       </div>
       <div class="sm:w-3/4 lg:w-5/12 mx-auto py-6 sm:pt-28 pt-18 px-2">
         <h1 class="text-1xl text-center text-blue-400">
-          Are you buying? We are selling
+          Team up with a strong partner
         </h1>
-        <p class="text-center text-4xl mt-4">
-          Choose from over 12 000 quality cars
-        </p>
+        <p class="text-center text-4xl mt-4">Meet AAA AUTO B2B division</p>
       </div>
       <div>
         <div class="bg-gray-100 flex flex-col items-center justify-center p-6">
           <!-- Container for Cards with Buttons -->
-          <div class="relative w-full max-w-2xl">
+          <div class="relative w-full max-w-7xl">
             <div
               id="scrollContainer"
               class="flex overflow-x-auto space-x-4 snap-x snap-mandatory scrollbar-hide scroll-smooth p-4"
@@ -319,8 +340,9 @@
                 </p>
               </div>
             </div>
+
             <!-- Progress Indicator -->
-            <div class="relative w-full max-w-2xl flex items-center mb-6">
+            <div class="relative w-full max-w-[60%] flex items-center mb-6">
               <span id="progressText" class="text-blue-600 text-lg font-bold"
                 >01</span
               >
@@ -336,18 +358,18 @@
             </div>
 
             <!-- Navigation Buttons -->
-            <div class="flex justify-between mt-4">
+            <div class="flex space-x-16 mt-4">
               <button
                 id="prevBtn"
-                class="bg-gray-300 text-gray-500 p-2 rounded-full shadow-md disabled"
+                class="text-blue-600 hover:opacity-75 transition"
               >
-                ⬅
+                <i class="fa-solid fa-arrow-left"></i>
               </button>
               <button
                 id="nextBtn"
-                class="bg-blue-600 text-white p-2 rounded-full shadow-md hover:bg-blue-700"
+                class="text-blue-600 hover:opacity-75 transition"
               >
-                ➡
+                <i class="fa-solid fa-arrow-right"></i>
               </button>
             </div>
           </div>
@@ -363,7 +385,7 @@
             const cards = [...scrollContainer.children];
             const totalCards = cards.length;
 
-            // Update UI
+            // Update UI function
             function updateUI() {
               progressText.innerText = String(currentIndex + 1).padStart(
                 2,
@@ -374,9 +396,13 @@
               }%`;
 
               // Enable/Disable Buttons
-              prevBtn.classList.toggle("disabled", currentIndex === 0);
+              prevBtn.disabled = currentIndex === 0;
+              nextBtn.disabled = currentIndex === totalCards - 1;
+
+              // Adjust opacity for disabled state
+              prevBtn.classList.toggle("opacity-50", currentIndex === 0);
               nextBtn.classList.toggle(
-                "disabled",
+                "opacity-50",
                 currentIndex === totalCards - 1
               );
             }
@@ -426,6 +452,364 @@
 
             updateUI();
           </script>
+        </div>
+
+        <div class="flex justify-center">
+          <button
+            class="bg-blue-500/80 rounded-xl px-4 py-4 font-extrabold text-white sm:w-auto capitalize transition shadow-lg hover:bg-blue-400/90"
+          >
+            become a partner
+          </button>
+        </div>
+      </div>
+    </section>
+    <!--car display picture session -->
+    <section id="search-seccion" class="bg-gray-100 mt-10 py-10 sm:mt-0">
+      <div>
+        <div class="bg-gray-100 flex flex-col items-center justify-center p-6">
+          <!-- Container for Cards with Buttons -->
+          <div class="relative w-full max-w-7xl">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h1 class="uppercase text-xs sm:text-lg text-blue-600">
+                  How deals now
+                </h1>
+                <h1 class="capitalize text-2xl sm:text-4xl">New arrivals</h1>
+              </div>
+              <div class="group flex items-center space-x-2 cursor-pointer">
+                <p
+                  class="text-blue-600 font-medium group-hover:translate-x-2 transition-transform duration-300"
+                >
+                  Browse all
+                </p>
+                <i
+                  class="fa-solid fa-arrow-right text-blue-600 group-hover:translate-x-2 transition-transform duration-300"
+                ></i>
+              </div>
+            </div>
+            <div
+              id="scrollContainer2"
+              class="flex overflow-x-auto space-x-4 snap-x snap-mandatory scrollbar-hide scroll-smooth p-4"
+            >
+              <!-- Cards -->
+              <!--first car -->
+
+              <div
+                class="flex-none w-80 rounded-lg snap-center shadow-lg bg-white flex-shrink-0"
+              >
+                <div class="relative overflow-hidden h-48">
+                  <img
+                    src="/mg-zs-11.jpg"
+                    alt="MG ZS 11"
+                    class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div
+                    class="absolute top-3 left-3 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-md"
+                  >
+                    AVAILABLE IN 26 DAYS
+                  </div>
+                </div>
+                <div class="p-6">
+                  <h1 class="text-lg font-semibold">MG ZS II</h1>
+                  <p class="text-sm text-gray-500">2024 • 12,975 km</p>
+                  <div class="flex space-x-2 mt-3">
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Petrol
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      1.0 Turbo, 82 kW
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Automat
+                    </button>
+                  </div>
+                  <div class="pt-6 border-t mt-4">
+                    <div class="flex justify-between">
+                      <p class="text-gray-500">Price excl. VAT:</p>
+                      <p class="text-blue-600 font-semibold">€16,299</p>
+                    </div>
+                    <div class="flex justify-between">
+                      <p class="text-gray-400">Price incl. VAT:</p>
+                      <p class="text-gray-500">€20,047</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--second car-->
+
+              <div
+                class="flex-none w-80 rounded-lg snap-center shadow-lg bg-white flex-shrink-0"
+              >
+                <div class="relative overflow-hidden h-48">
+                  <img
+                    src="/mg-zs-11.jpg"
+                    alt="MG ZS 11"
+                    class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div
+                    class="absolute top-3 left-3 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-md"
+                  >
+                    AVAILABLE IN 26 DAYS
+                  </div>
+                </div>
+                <div class="p-6">
+                  <h1 class="text-lg font-semibold">MG ZS II</h1>
+                  <p class="text-sm text-gray-500">2024 • 12,975 km</p>
+                  <div class="flex space-x-2 mt-3">
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Petrol
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      1.0 Turbo, 82 kW
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Automat
+                    </button>
+                  </div>
+                  <div class="pt-6 border-t mt-4">
+                    <div class="flex justify-between">
+                      <p class="text-gray-500">Price excl. VAT:</p>
+                      <p class="text-blue-600 font-semibold">€16,299</p>
+                    </div>
+                    <div class="flex justify-between">
+                      <p class="text-gray-400">Price incl. VAT:</p>
+                      <p class="text-gray-500">€20,047</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--third car-->
+
+              <div
+                class="flex-none w-80 rounded-lg snap-center shadow-lg bg-white flex-shrink-0"
+              >
+                <div class="relative overflow-hidden h-48">
+                  <img
+                    src="/mg-zs-11.jpg"
+                    alt="MG ZS 11"
+                    class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div
+                    class="absolute top-3 left-3 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-md"
+                  >
+                    AVAILABLE IN 26 DAYS
+                  </div>
+                </div>
+                <div class="p-6">
+                  <h1 class="text-lg font-semibold">MG ZS II</h1>
+                  <p class="text-sm text-gray-500">2024 • 12,975 km</p>
+                  <div class="flex space-x-2 mt-3">
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Petrol
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      1.0 Turbo, 82 kW
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Automat
+                    </button>
+                  </div>
+                  <div class="pt-6 border-t mt-4">
+                    <div class="flex justify-between">
+                      <p class="text-gray-500">Price excl. VAT:</p>
+                      <p class="text-blue-600 font-semibold">€16,299</p>
+                    </div>
+                    <div class="flex justify-between">
+                      <p class="text-gray-400">Price incl. VAT:</p>
+                      <p class="text-gray-500">€20,047</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--fourh car-->
+
+              <div
+                class="flex-none w-80 rounded-lg snap-center shadow-lg bg-white flex-shrink-0"
+              >
+                <div class="relative overflow-hidden h-48">
+                  <img
+                    src="/mg-zs-11.jpg"
+                    alt="MG ZS 11"
+                    class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div
+                    class="absolute top-3 left-3 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-md"
+                  >
+                    AVAILABLE IN 26 DAYS
+                  </div>
+                </div>
+                <div class="p-6">
+                  <h1 class="text-lg font-semibold">MG ZS II</h1>
+                  <p class="text-sm text-gray-500">2024 • 12,975 km</p>
+                  <div class="flex space-x-2 mt-3">
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Petrol
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      1.0 Turbo, 82 kW
+                    </button>
+                    <button
+                      class="bg-gray-100 px-3 py-1 text-xs text-blue-600 rounded-md"
+                    >
+                      Automat
+                    </button>
+                  </div>
+                  <div class="pt-6 border-t mt-4">
+                    <div class="flex justify-between">
+                      <p class="text-gray-500">Price excl. VAT:</p>
+                      <p class="text-blue-600 font-semibold">€16,299</p>
+                    </div>
+                    <div class="flex justify-between">
+                      <p class="text-gray-400">Price incl. VAT:</p>
+                      <p class="text-gray-500">€20,047</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="relative w-full max-w-[60%] flex items-center mb-6">
+              <span id="progressText2" class="text-blue-600 text-lg font-bold"
+                >01</span
+              >
+              <div class="w-full h-1 bg-gray-300 mx-2 relative">
+                <div
+                  id="progressBar2"
+                  class="h-1 bg-blue-600 w-0 transition-all duration-300"
+                ></div>
+              </div>
+              <span id="totalSteps2" class="text-gray-400 text-lg font-bold"
+                >04</span
+              >
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex space-x-16 mt-4">
+              <button
+                id="prevBtn2"
+                class="text-blue-600 hover:opacity-75 transition"
+              >
+                <i class="fa-solid fa-arrow-left"></i>
+              </button>
+              <button
+                id="nextBtn2"
+                class="text-blue-600 hover:opacity-75 transition"
+              >
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <script>
+            const scrollContainer2 =
+              document.getElementById("scrollContainer2");
+            const progressBar2 = document.getElementById("progressBar2");
+            const progressText2 = document.getElementById("progressText2");
+            const prevBtn2 = document.getElementById("prevBtn2");
+            const nextBtn2 = document.getElementById("nextBtn2");
+
+            let currentIndex2 = 0;
+            const cards2 = [...scrollContainer2.children];
+            const totalCards2 = cards2.length;
+
+            // Update UI function
+            function updateUI() {
+              progressText2.innerText = String(currentIndex2 + 1).padStart(
+                2,
+                "0"
+              );
+              progressBar2.style.width = `${
+                ((currentIndex2 + 1) / totalCards2) * 100
+              }%`;
+
+              // Enable/Disable Buttons
+              prevBtn2.disabled = currentIndex2 === 0;
+              nextBtn2.disabled = currentIndex2 === totalCards2 - 1;
+
+              // Adjust opacity for disabled state
+              prevBtn2.classList.toggle("opacity-50", currentIndex2 === 0);
+              nextBtn2.classList.toggle(
+                "opacity-50",
+                currentIndex2 === totalCards2 - 1
+              );
+            }
+
+            // Scroll to the next card
+            function scrollRigh2() {
+              if (currentIndex2 < totalCards2 - 1) {
+                currentIndex2++;
+                cards2[currentIndex2].scrollIntoView({
+                  behavior: "smooth",
+                  block: "nearest",
+                  inline: "center",
+                });
+              }
+            }
+
+            // Scroll to the previous card
+            function scrollLeft2() {
+              if (currentIndex2 > 0) {
+                currentIndex2--;
+                cards2[currentIndex2].scrollIntoView({
+                  behavior: "smooth",
+                  block: "nearest",
+                  inline: "center",
+                });
+              }
+            }
+
+            // Observe which card is in view
+            const observer2 = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    currentIndex2 = cards2.indexOf(entry.target);
+                    updateUI();
+                  }
+                });
+              },
+              { threshold: 0.6 }
+            );
+
+            cards2.forEach((card2) => observer2.observe(card2));
+
+            // Attach event listeners
+            nextBtn2.addEventListener("click", scrollRigh2);
+            prevBtn2.addEventListener("click", scrollLeft2);
+
+            updateUI();
+          </script>
+        </div>
+
+        <div class="flex justify-center">
+          <button
+            class="bg-blue-500/80 rounded-xl px-4 py-4 font-extrabold text-white sm:w-auto capitalize transition shadow-lg hover:bg-blue-400/90"
+          >
+            become a partner
+          </button>
         </div>
       </div>
     </section>
